@@ -27,6 +27,7 @@ $(BB_OUT_INTERMEDIATES):
 
 $(BB_OUT_INTERMEDIATES)/.config: $(BB_PATH)/configs/android_defconfig | $(BB_OUT_INTERMEDIATES)
 	# sed -e "s|^CONFIG_CROSS_COMPILER_PREFIX=.*|CONFIG_CROSS_COMPILER_PREFIX=\"$(BB_TC_PREFIX)\"|;s|^CONFIG_EXTRA_CFLAGS=.*|CONFIG_EXTRA_CFLAGS=\"$(BB_COMPILER_FLAGS)\"|" configs/android_defconfig >.config
+	for i in $(BB_PATH)/scripts/kconfig/*_shipped; do ln -sf `basename $$i` $${i/_shipped/}; done
 	export PATH=$(BB_TC_DIR):$(PATH) && $(MAKE) -C $(BB_PATH) android_defconfig $(BB_MAKE_FLAGS)
 
 $(LOCAL_BUILT_MODULE): $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(TARGET_OUT_SHARED_LIBRARIES)/libm.so $(TARGET_OUT_SHARED_LIBRARIES)/libc.so $(TARGET_OUT_SHARED_LIBRARIES)/libdl.so $(BB_OUT_INTERMEDIATES)/.config FORCE
