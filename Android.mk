@@ -4,7 +4,7 @@ include $(CLEAR_VARS)
 
 BB_TC_DIR := $(realpath $(shell dirname $(TARGET_TOOLS_PREFIX)))
 BB_TC_PREFIX := $(shell basename $(TARGET_TOOLS_PREFIX))
-BB_LDFLAGS := -nostdlib -Bdynamic -Wl,-z,muldefs$(shell if test $(PLATFORM_SDK_VERSION) -lt 16; then echo -ne ',-T$(CURDIR)/$(BUILD_SYSTEM)/armelf.x'; fi),-dynamic-linker,/system/bin/linker,-z,nocopyreloc,--no-undefined $(CURDIR)/$(TARGET_CRTBEGIN_DYNAMIC_O) $(CURDIR)/$(TARGET_CRTEND_O) -L$(CURDIR)/$(TARGET_OUT_STATIC_LIBRARIES)
+BB_LDFLAGS := -nostdlib -Bdynamic -Wl,-z,muldefs$(shell if test $(PLATFORM_SDK_VERSION) -lt 16; then echo -ne ',-T$(CURDIR)/$(BUILD_SYSTEM)/armelf.x'; fi),-dynamic-linker,/system/bin/linker,-z,nocopyreloc,--no-undefined $(CURDIR)/$(TARGET_CRTBEGIN_DYNAMIC_O) $(CURDIR)/$(TARGET_CRTEND_O) -L$(CURDIR)/$(TARGET_OUT_STATIC_LIBRARIES) -L$(CURDIR)/$(TARGET_OUT_SHARED_LIBRARIES)
 # FIXME remove -fno-strict-aliasing once all aliasing violations are fixed
 BB_COMPILER_FLAGS := $(subst -I ,-I$(CURDIR)/,$(subst -include ,-include $(CURDIR)/,$(TARGET_GLOBAL_CFLAGS))) $(foreach d,$(TARGET_C_INCLUDES),-I$(CURDIR)/$(d)) -fno-stack-protector -Wno-error=format-security -fno-strict-aliasing
 BB_LDLIBS := dl m c gcc
