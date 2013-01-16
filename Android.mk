@@ -34,7 +34,7 @@ $(LOCAL_BUILT_MODULE): $(TARGET_CRTBEGIN_DYNAMIC_O) $(TARGET_CRTEND_O) $(TARGET_
 	export PATH=$(BB_TC_DIR):$(PATH) && $(MAKE) -C $(BB_PATH) $(BB_MAKE_FLAGS)
 
 
-ifeq ($(BB_ADD_SYMLINKS),true)
+ifneq ($(BB_ADD_SYMLINKS),false)
 BUSYBOX_TOOLS := \
 	ar \
 	arp \
