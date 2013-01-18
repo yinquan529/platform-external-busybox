@@ -210,6 +210,7 @@ BUSYBOX_TOOLS := \
 	tac \
 	tail \
 	tar \
+	taskset \
 	tcpsvd \
 	tee \
 	telnet \
@@ -233,6 +234,7 @@ BUSYBOX_TOOLS := \
 	unlzop \
 	unxz \
 	unzip \
+	usleep \
 	uudecode \
 	uuencode \
 	vi \
