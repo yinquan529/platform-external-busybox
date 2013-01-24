@@ -29,6 +29,21 @@
 #include <linux/filter.h>
 #include <linux/if_packet.h>
 
+#ifndef PACKET_AUXDATA
+/* Android's (in)sanitized kernel headers (at least up to 4.2.1) strip
+ * tpacket_auxdata, so we have to define it manually */
+#define PACKET_AUXDATA 8
+struct tpacket_auxdata {
+	uint32_t	tp_status;
+	uint32_t	tp_len;
+	uint32_t	tp_snaplen;
+	uint16_t	tp_mac;
+	uint16_t	tp_net;
+	uint16_t	tp_vlan_tci;
+	uint16_t	tp_padding;
+};
+#endif
+
 /* "struct client_config_t client_config" is in bb_common_bufsiz1 */
 
 
