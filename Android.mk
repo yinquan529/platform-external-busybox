@@ -122,6 +122,7 @@ BUSYBOX_TOOLS := \
 	iprule \
 	iptunnel \
 	klogd \
+	less \
 	linuxrc \
 	loadkmap \
 	losetup \
