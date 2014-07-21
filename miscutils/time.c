@@ -69,9 +69,9 @@ static void resuse_end(pid_t pid, resource_t *resp)
 {
 	pid_t caught;
 
-	/* Ignore signals, but don't ignore the children.  When wait3
+	/* Ignore signals, but don't ignore the children.  When wait4
 	 * returns the child process, set the time the command finished. */
-	while ((caught = wait3(&resp->waitstatus, 0, &resp->ru)) != pid) {
+	while ((caught = wait4(-1, &resp->waitstatus, 0, &resp->ru)) != pid) {
 		if (caught == -1 && errno != EINTR) {
 			bb_perror_msg("wait");
 			return;
